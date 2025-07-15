@@ -1,3 +1,5 @@
+import createHttpError from 'http-errors';
+
 import {
   getAllContacts,
   getContactById,
@@ -29,8 +31,9 @@ export const getContactByIdController = async (req, res, next) => {
   //   }
   // А тепер додаємо базову обробку помилки замість res.status(404)
   if (!contact) {
-    next(new Error('Contact not found'));
-    return;
+    throw createHttpError(404, 'Contact not found');
+    // next(new Error('Contact not found'));
+    // return;
   }
 
   // Відповідь, якщо контакт знайдено
@@ -52,29 +55,30 @@ export const createContactController = async (req, res) => {
 };
 
 export const deleteContactController = async (req, res, next) => {
-  const { contactId } = req.params;
-  const contact = await deleteContact(contactId);
+  const contact = await deleteContact(req.params.contactId);
 
   if (!contact) {
-    next(new Error('Contact not found'));
-    return;
+    throw createHttpError(404, 'Contact not found');
+    // next(new Error('Contact not found'));
+    // return;
   }
 
   res.status(204).send();
 };
 
 export const patchContactController = async (req, res, next) => {
-  const { contactId } = req.params;
-  const result = await updateContact(contactId, req.body);
+  const result = await updateContact(req.params.contactId, req.body);
 
   if (!result) {
-    next(new Error('Contact not found'));
-    return;
+    throw createHttpError(404, 'Contact not found');
+    // next(new Error('Contact not found'));
+    // return;
   }
 
   res.status(200).json({
     status: 200,
     message: `Successfully patched a contact!`,
-    data: result.contact,
+    data: result,
+    // data: result.contact,
   });
 };
