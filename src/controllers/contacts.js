@@ -8,12 +8,18 @@ import {
   updateContact,
 } from '../services/contacts.js';
 import { parsePaginationParams } from '../utils/parsePaginationParams.js';
+import { parseSortParams } from '../utils/parseSortParams.js';
 
 export const getContactsController = async (req, res) => {
   const { page, perPage } = parsePaginationParams(req.query);
+
+  const { sortBy, sortOrder } = parseSortParams(req.query);
+
   const contacts = await getAllContacts({
     page,
     perPage,
+    sortBy,
+    sortOrder,
   });
 
   res.status(200).json({
@@ -27,18 +33,8 @@ export const getContactByIdController = async (req, res, next) => {
   const { contactId } = req.params;
   const contact = await getContactById(contactId);
 
-  // Відповідь, якщо контакт не знайдено
-  //   if (!contact) {
-  //     res.status(404).json({
-  //       message: 'Contact not found',
-  //     });
-  //     return;
-  //   }
-  // А тепер додаємо базову обробку помилки замість res.status(404)
   if (!contact) {
     throw createHttpError(404, 'Contact not found');
-    // next(new Error('Contact not found'));
-    // return;
   }
 
   // Відповідь, якщо контакт знайдено
@@ -64,8 +60,6 @@ export const deleteContactController = async (req, res, next) => {
 
   if (!contact) {
     throw createHttpError(404, 'Contact not found');
-    // next(new Error('Contact not found'));
-    // return;
   }
 
   res.status(204).send();
@@ -76,14 +70,11 @@ export const patchContactController = async (req, res, next) => {
 
   if (!result) {
     throw createHttpError(404, 'Contact not found');
-    // next(new Error('Contact not found'));
-    // return;
   }
 
   res.status(200).json({
     status: 200,
     message: `Successfully patched a contact!`,
     data: result,
-    // data: result.contact,
   });
 };
