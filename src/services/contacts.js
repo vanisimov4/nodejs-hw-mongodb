@@ -17,6 +17,9 @@ export const getAllContacts = async ({
   if (filter.type) {
     contactsQuery.where('contactType').equals(filter.type);
   }
+  if (typeof filter.favourite === 'boolean') {
+    contactsQuery.where('isFavourite').equals(filter.favourite);
+  }
 
   const [contactsCount, contacts] = await Promise.all([
     ContactsCollection.find().merge(contactsQuery).countDocuments(),
@@ -27,13 +30,6 @@ export const getAllContacts = async ({
       .limit(limit)
       .exec(),
   ]);
-
-  // послідовне виконання 2-х await (довше виконується)
-  // const contactsCount = await ContactsCollection.find()
-  //   .merge(contactsQuery)
-  //   .countDocuments();
-
-  // const contacts = await contactsQuery.skip(skip).limit(limit).exec();
 
   const paginationData = calculatePaginationData(contactsCount, perPage, page);
 

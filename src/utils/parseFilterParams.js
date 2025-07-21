@@ -6,32 +6,25 @@ const parseType = (type) => {
   if (isType(type)) return type;
 };
 
-// const parseFavourite = (favourite) => {
-//   const isBoolean = typeof number === 'string';
-//   if (!isBoolean) return;
+const parseFavourite = (favourite) => {
+  const isString = typeof favourite === 'string';
+  if (!isString) return;
 
-//   const parsedNumber = parseInt(number);
-//   if (Number.isNaN(parsedNumber)) {
-//     return;
-//   }
+  const lower = favourite.trim().toLowerCase();
+  if (lower === 'true') return true;
+  if (lower === 'false') return false;
 
-//   return parsedNumber;
-// };
+  return;
+};
 
 export const parseFilterParams = (query) => {
-  const { type } = query; //, maxAge, minAge, maxAvgMark, minAvgMark
+  const { type, favourite } = query;
 
   const parsedType = parseType(type);
-  //   const parsedMaxAge = parseNumber(maxAge);
-  //   const parsedMinAge = parseNumber(minAge);
-  //   const parsedMaxAvgMark = parseNumber(maxAvgMark);
-  //   const parsedMinAvgMark = parseNumber(minAvgMark);
+  const parsedFavourite = parseFavourite(favourite);
 
   return {
     type: parsedType,
-    // maxAge: parsedMaxAge,
-    // minAge: parsedMinAge,
-    // maxAvgMark: parsedMaxAvgMark,
-    // minAvgMark: parsedMinAvgMark,
+    favourite: parsedFavourite,
   };
 };
