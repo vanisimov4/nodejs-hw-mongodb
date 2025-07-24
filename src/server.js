@@ -3,7 +3,8 @@ import pino from 'pino-http';
 import cors from 'cors';
 
 import { getEnvVar } from './utils/getEnvVar.js';
-import contactsRouter from './routers/contacts.js';
+// import contactsRouter from './routers/contacts.js';
+import router from './routers/index.js';
 // Імпортуємо middleware
 import { errorHandler } from './middlewares/errorHandler.js';
 import { notFoundHandler } from './middlewares/notFoundHandler.js';
@@ -30,7 +31,8 @@ export const setupServer = () => {
     });
   });
 
-  app.use('/contacts', contactsRouter);
+  // app.use('/contacts', contactsRouter);
+  app.use(router);
 
   app.use(notFoundHandler);
 
