@@ -5,7 +5,7 @@ import cors from 'cors';
 import { getEnvVar } from './utils/getEnvVar.js';
 // import contactsRouter from './routers/contacts.js';
 import router from './routers/index.js';
-// Імпортуємо middleware
+
 import { errorHandler } from './middlewares/errorHandler.js';
 import { notFoundHandler } from './middlewares/notFoundHandler.js';
 
