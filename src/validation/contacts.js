@@ -1,4 +1,5 @@
 import Joi from 'joi';
+// import { isValidObjectId } from 'mongoose';
 
 export const createContactSchema = Joi.object({
   name: Joi.string().min(3).max(20).required().messages({
@@ -21,7 +22,7 @@ export const createContactSchema = Joi.object({
     'string.max': 'Email should have at most {#limit} characters',
   }),
   isFavourite: Joi.boolean().messages({
-    'string.base': 'isFavourite should be a boolean',
+    'boolean.base': 'isFavourite should be a boolean',
   }),
   contactType: Joi.string()
     .valid('work', 'home', 'personal')
@@ -30,6 +31,18 @@ export const createContactSchema = Joi.object({
       'string.base': 'contactType should be a string',
       'any.required': 'contactType is required',
     }),
+  // userId: Joi.string()
+  //   .required()
+  //   .custom((value, helper) => {
+  //     if (value && !isValidObjectId(value)) {
+  //       return helper.message('Parent id should be a valid mongo id');
+  //     }
+  //     return true;
+  //   }),
+  // .messages({
+  //   'string.base': 'userId should be a string',
+  //   'any.required': 'userId is required',
+  // }),
 });
 
 export const updateContactSchema = Joi.object({
@@ -51,9 +64,21 @@ export const updateContactSchema = Joi.object({
     'string.max': 'Email should have at most {#limit} characters',
   }),
   isFavourite: Joi.boolean().messages({
-    'string.base': 'isFavourite should be a boolean',
+    'boolean.base': 'isFavourite should be a boolean',
   }),
   contactType: Joi.string().valid('work', 'home', 'personal').messages({
     'string.base': 'contactType should be a string',
   }),
+  // userId: Joi.string()
+  //   .required()
+  //   .custom((value, helper) => {
+  //     if (value && !isValidObjectId(value)) {
+  //       return helper.message('Parent id should be a valid mongo id');
+  //     }
+  //     return true;
+  //   })
+  //   .messages({
+  //     'string.base': 'userId should be a string',
+  //     'any.required': 'userId is required',
+  //   }),
 });

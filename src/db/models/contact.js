@@ -23,6 +23,12 @@ const contactsSchema = new Schema(
       enum: ['work', 'home', 'personal'],
       default: 'personal',
     },
+    userId: {
+      // нова властивість
+      type: Schema.Types.ObjectId,
+      required: true,
+      ref: 'users',
+    },
   },
   {
     timestamps: true,
