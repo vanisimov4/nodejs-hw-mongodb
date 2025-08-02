@@ -38,7 +38,7 @@ export const createContactSchema = Joi.object({
   //       return helper.message('Parent id should be a valid mongo id');
   //     }
   //     return true;
-  //   }),
+  //   })
   // .messages({
   //   'string.base': 'userId should be a string',
   //   'any.required': 'userId is required',
