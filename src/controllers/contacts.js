@@ -82,6 +82,21 @@ export const patchContactController = async (req, res, next) => {
     throw createHttpError(404, 'Contact not found');
   }
 
+// const photo = req.file;
+  
+	/* в photo лежить обʼєкт файлу
+		{
+		  fieldname: 'photo',
+		  originalname: 'download.jpeg',
+		  encoding: '7bit',
+		  mimetype: 'image/jpeg',
+		  destination: '/Users/borysmeshkov/Projects/goit-study/students-app/temp',
+		  filename: '1710709919677_download.jpeg',
+		  path: '/Users/borysmeshkov/Projects/goit-study/students-app/temp/1710709919677_download.jpeg',
+		  size: 7
+	  }
+	*/
+
   res.status(200).json({
     status: 200,
     message: `Successfully patched a contact!`,
