@@ -132,7 +132,7 @@ export const requestResetToken = async (email) => {
   });
 };
 
-export const resetPassword = async (payload) => {
+export const resetPassword = async (payload, sessionId) => {
   let entries;
 
   try {
@@ -161,4 +161,6 @@ if (err.name === "TokenExpiredError" || err.name === "JsonWebTokenError") {
     { _id: user._id },
     { password: encryptedPassword },
   );
+  
+  await SessionsCollection.deleteOne({ _id: sessionId });
 };
