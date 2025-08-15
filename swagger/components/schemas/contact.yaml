@@ -5,6 +5,7 @@ required:
   - phoneNumber
   - contactType
   - userId
+  - photo
   - createdAt
   - updatedAt
 properties:
@@ -30,7 +31,7 @@ properties:
     example: false
     default: false
   contactType:
-    description: 'type of the contact'
+    description: 'Type of the contact'
     type: string
     enum: ['work', 'home', 'personal']
     default: 'personal'
