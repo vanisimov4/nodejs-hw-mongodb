@@ -200,7 +200,6 @@
                   "name",
                   "phoneNumber",
                   "contactType",
-                  "userId",
                   "photo"
                 ],
                 "properties": {
@@ -234,11 +233,6 @@
                       "personal"
                     ],
                     "default": "personal"
-                  },
-                  "userId": {
-                    "description": "User, who created this contact",
-                    "type": "string",
-                    "example": "65e4decdd286b30065d54af9"
                   },
                   "photo": {
                     "description": "Contact's photo",
